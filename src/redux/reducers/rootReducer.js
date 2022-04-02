@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import userData from './userData';
+import adminReducer from './admin';
 
 const rootReducer = combineReducers({
-  userData,
+  adminReducer : adminReducer,
 });
 
 export default rootReducer;

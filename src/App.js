@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -11,8 +12,15 @@ import ErrorPage from './components/Pages/WrongURL/WrongURL';
 import AboutUs from './components/Pages/AboutUs/AboutUs';
 import AdminLogIn from './components/Pages/AdminLogIn/AdminLogIn';
 import SignupLogin from './components/Pages/UserSignupAndLogin/SignupLogin.jsx';
+import { fetchUserFromAPI } from './redux/actions/admin';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserFromAPI());
+    console.log('hello');
+  }, [dispatch]);
+
   return (
     <>
       <Header />

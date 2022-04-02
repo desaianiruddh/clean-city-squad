@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-primary px-3 d-flex justify-content-between">
-      <div className="fs-4 fw-bold navbar-brand">Clean City Squad</div>
+    <nav className="navbar navbar-expand-md navbar-dark bg-primary px-3 d-flex justify-content-between">
+      <div className="fs-4 fw-bold navbar-brand ">Clean City Squad</div>
       <div>
         <button
           className="navbar-toggler"
@@ -15,10 +15,10 @@ const Header = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon ms-auto"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav  me3-2 mb-lg-0">
+          <ul className="navbar-nav  me-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link fw-bold" to="/">
                 Home
