@@ -1,27 +1,44 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import data from '../../DummyData.json';
 import ViewComplaints from './ViewComplaints';
 
 const AdminComplaintsWrapper = () => {
+  const { complaintsData, isShowOpenComplaints } = useSelector(
+    (state) => state
+  );
   return (
     <>
-      <table border="0" className='m-3 mt-5'>
+      <div className="text-center fs-3 fw-bold text-decoration-underline">
+        Complaints
+      </div>
+      <table border="0" className="m-5">
         <thead>
           <tr>
-            <th style={{width : "5%"}}>Id</th>
-            <th style={{width : "10%"}}>Name</th>
-            <th style={{width : "15%"}}>complaintType</th>
-            <th style={{width : "10%"}}>Area</th>
-            <th style={{width : "30%"}}>Address</th>
-            <th style={{width : "10%"}}>Latitude</th>
-            <th style={{width : "10%"}}>Longitude</th>
+            <th style={{ width: '5%' }}>Id</th>
+            <th style={{ width: '5%' }}>Name</th>
+            <th style={{ width: '5%' }}>Type</th>
+            <th style={{ width: '5%' }}>Area</th>
+            <th style={{ width: '30%' }}>Address</th>
+            <th style={{ width: '5%' }}>Latitude</th>
+            <th style={{ width: '5%' }}>Longitude</th>
+            {isShowOpenComplaints && <th style={{ width: '5%' }}>Status</th>}
           </tr>
         </thead>
         <tbody>
-          {data.map((data) => {
-            const { id, name, complaintType, area, latitude, longitude, address1, address2 } = data;
-            const address = address1 + ' '+address2 
+          {complaintsData.map((data) => {
+            const {
+              id,
+              name,
+              complaintType,
+              area,
+              latitude,
+              longitude,
+              address1,
+              address2,
+              status,
+            } = data;
+            const address = address1 + ' ' + address2;
             return (
               <ViewComplaints
                 key={Math.random()}
@@ -32,6 +49,7 @@ const AdminComplaintsWrapper = () => {
                 latitude={latitude}
                 longitude={longitude}
                 address={address}
+                status={status}
               />
             );
           })}

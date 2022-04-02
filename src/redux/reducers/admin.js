@@ -1,7 +1,8 @@
 const initialData = {
-  complaintsData : [],
-  completed : false
-}
+  complaintsData: [],
+  completed: false,
+  isShowOpenComplaints: true,
+};
 
 const adminReducer = (state = initialData, action) => {
   const { type, payload } = action;
@@ -9,13 +10,39 @@ const adminReducer = (state = initialData, action) => {
     case 'FETCH_USER_SUCCESS': {
       return {
         ...state,
-        complaintsData : payload
+        complaintsData: payload,
       };
     }
     case 'FETCH_USER_FAILED': {
       console.log(payload);
       return {
         ...state,
+      };
+    }
+    case 'SHOW_OPEN_COMPLAINT': {
+      return {
+        ...state,
+        isShowOpenComplaints: true,
+      };
+    }
+    case 'SHOW_CLOSE_COMPLAINT': {
+      return {
+        ...state,
+        isShowOpenComplaints: false,
+      };
+    }
+    case 'CLOSE_REQUEST': {
+      return {
+        ...state,
+        complaintsData: state.complaintsData.map((data) => {
+          if (payload === data.id) {
+            return {
+              ...data,
+              status: true,
+            };
+          }
+          return data;
+        }),
       };
     }
     default:

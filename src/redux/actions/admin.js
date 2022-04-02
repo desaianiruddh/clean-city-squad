@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import complaintJSON from '../../DummyData.json';
 
 //get complaints list data for admin panel
@@ -36,5 +36,24 @@ export const fetchUserSuccess = (complaintData) => {
   return {
     type: 'FETCH_USER_SUCCESS',
     payload: complaintData,
+  };
+};
+
+export const showCloseComplaints = () => {
+  return {
+    type: 'SHOW_CLOSE_COMPLAINT',
+  };
+};
+
+export const showOpenComplaints = () => {
+  return {
+    type: 'SHOW_OPEN_COMPLAINT',
+  };
+};
+
+export const closeComplaint = (id) => {
+  return {
+    type: 'CLOSE_REQUEST',
+    payload: id,
   };
 };

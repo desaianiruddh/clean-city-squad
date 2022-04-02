@@ -25,8 +25,13 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/signup-and-login">
-                Login/Signup
+              <Link className="nav-link fw-bold" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link fw-bold" to="/signup">
+                Signup
               </Link>
             </li>
             <li className="nav-item">

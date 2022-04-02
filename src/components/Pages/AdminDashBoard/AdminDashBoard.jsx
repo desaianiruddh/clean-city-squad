@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
+import {
+  showOpenComplaints,
+  showCloseComplaints,
+} from '../../../redux/actions/admin';
 import AdminComplaintsWrapper from '../../ViewComplaints/AdminComplaintsWrapper';
-import './adminDashBoard.css'
+import './adminDashBoard.css';
 
 const AdminDashBoard = () => {
+  const dispatch = useDispatch();
   const [showOpenRequest, setShowOpenRequest] = useState(true);
   return (
     <div>
       {window.innerWidth > 990 ? (
-        <div >
-          <div className="mt-3 me-5 d-flex justify-content-end"> 
+        <div>
+          <div className="mt-3 me-5 d-flex justify-content-end">
             <ButtonGroup size="lg" className="mb-2">
               <Button className="bg-dark border-dark text-white" disabled>
                 <span className="fs-4 mt-2 me-2">Request filter</span>
@@ -22,6 +28,7 @@ const AdminDashBoard = () => {
                     : 'bg-white text-dark border-dark'
                 }
                 onClick={() => {
+                  dispatch(showOpenComplaints());
                   setShowOpenRequest(true);
                 }}
               >
@@ -34,6 +41,7 @@ const AdminDashBoard = () => {
                     : 'bg-primary shadow-none'
                 }
                 onClick={() => {
+                  dispatch(showCloseComplaints());
                   setShowOpenRequest(false);
                 }}
               >
@@ -41,7 +49,7 @@ const AdminDashBoard = () => {
               </Button>
             </ButtonGroup>
           </div>
-          <AdminComplaintsWrapper />
+          <AdminComplaintsWrapper showOpenRequest={showOpenRequest} />
         </div>
       ) : (
         <div className="fs-4 mt-5 text-center text-danger">
