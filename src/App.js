@@ -29,7 +29,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-        <Route path="/user-dahsboard" element={<UserDashBoard />} />
+        <Route path="/user-dashboard" element={<UserDashBoard />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/forget-pass" element={<Forgot />} />
         <Route path="*" element={<ErrorPage />} />

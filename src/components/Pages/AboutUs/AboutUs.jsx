@@ -18,7 +18,7 @@ const AboutUs = () => {
           </div>
         </div>
         <div>
-          <div className="text-center m-5 fs-5 paragrapg-text">
+          <div className="text-center m-5 fs-5 paragraph-text">
             we're building web app which helps people to stay healthy and clean
             their city or near by roads by sending the click of garbage they
             found near by and send the more than 2 photos to the corporation and

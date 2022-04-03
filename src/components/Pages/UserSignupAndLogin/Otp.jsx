@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { OTPVerified } from "../../../redux/actions/signup";
 import Form from "../../../utilities/Forms";
 
 import "./style.css";
 
-const Otp = () => {
+const Otp = ({phoneNumber}) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
   const [validate, setValidate] = useState({});
 
@@ -14,7 +19,7 @@ const Otp = () => {
       otp: {
         value: otp,
         isRequired: true,
-        minLength: 8,
+        minLength: 4,
       },
     });
 
@@ -36,8 +41,7 @@ const Otp = () => {
     if (validate) {
       setValidate({});
       setOtp("");
-
-      alert("Successfully Login");
+      navigate('/user-dashboard')
     }
   };
 
@@ -46,9 +50,9 @@ const Otp = () => {
       <div className="auth-main-col d-flex justify-content-center">
         <div className="main ">
           <div className="auth-body text-color">
-            <p className="my-4 fs-3">
-              <h4>OTP</h4>
-            </p>
+            <div className="my-4 fs-3">
+              <div>OTP</div>
+            </div>
             <div className="auth-form-container text-start">
               <form
                 className="auth-form"
@@ -67,11 +71,11 @@ const Otp = () => {
                     id="otp"
                     name="otp"
                     value={otp}
-                    placeholder="otp"
+                    placeholder="Enter Your OTP for verification"
                     onChange={(e) => setOtp(e.target.value)}
                   />
 
-                  <div className="extra mt-3 row justify-content-between">
+                  <div className="extra mt-2 row justify-content-between">
                     <div className="col-6"></div>
                   </div>
                 </div>
@@ -79,13 +83,12 @@ const Otp = () => {
                   <button
                     type="submit"
                     className="btn btn-primary w-100 theme-btn mx-auto my-4"
+                    onClick={()=>dispatch(OTPVerified(otp,phoneNumber))}
                   >
                     Verify
                   </button>
                 </div>
               </form>
-
-              <hr />
             </div>
           </div>
         </div>
