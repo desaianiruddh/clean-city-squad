@@ -10,7 +10,6 @@ import Home from './components/Pages/Home/Home';
 import UserDashBoard from './components/Pages/UserDashBoard/UserDashBoard';
 import ErrorPage from './components/Pages/WrongURL/WrongURL';
 import AboutUs from './components/Pages/AboutUs/AboutUs';
-import AdminLogIn from './components/Pages/AdminLogIn/AdminLogIn';
 import { fetchUserFromAPI } from './redux/actions/admin';
 import Signup from './components/Pages/UserSignupAndLogin/Signup';
 import LogIn from './components/Pages/UserSignupAndLogin/LogIn';
@@ -27,7 +26,6 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin-login" element={<AdminLogIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />

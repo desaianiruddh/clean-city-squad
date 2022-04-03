@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Form from "../../../utilities/Forms";
 
 import "./style.css";
@@ -47,7 +46,7 @@ const Otp = () => {
       <div className="auth-main-col d-flex justify-content-center">
         <div className="main ">
           <div className="auth-body text-color">
-            <p className="my-4">
+            <p className="my-4 fs-3">
               <h4>OTP</h4>
             </p>
             <div className="auth-form-container text-start">
@@ -81,7 +80,7 @@ const Otp = () => {
                     type="submit"
                     className="btn btn-primary w-100 theme-btn mx-auto my-4"
                   >
-                    Sign Up!
+                    Verify
                   </button>
                 </div>
               </form>

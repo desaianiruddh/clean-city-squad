@@ -4,17 +4,17 @@ import Form from "../../../utilities/Forms";
 import "../UserSignupAndLogin/style.css";
 
 const Forgot = () => {
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [validate, setValidate] = useState({});
 
   const validateforgotPassword = () => {
     let isValid = true;
 
     let validator = Form.validator({
-      phone: {
-        value: phone,
+      email: {
+        value: email,
         isRequired: true,
-        isDecimal: true,
+        isEmail: true,
       },
     });
 
@@ -34,9 +34,9 @@ const Forgot = () => {
     const validate = validateforgotPassword();
 
     if (validate) {
-      alert("Reset password link is sent to " + phone);
+      alert("Reset password link is sent to " + email);
       setValidate({});
-      setPhone("");
+      setEmail("");
     }
   };
 
@@ -45,8 +45,8 @@ const Forgot = () => {
       <div className="auth-main-col d-flex justify-content-center">
         <div className="main space-pad">
           <div className="auth-body mx-auto text-color">
-            <p>
-              <h4>Forgot Password</h4>
+            <p className="my-4 fs-3">
+              Forgot Password
             </p>
             <div className="auth-form-container text-start">
               <form
@@ -57,27 +57,27 @@ const Forgot = () => {
               >
                 <div className="email mb-3">
                   <input
-                    type="phone"
+                    type="email"
                     className={`form-control ${
                       validate.validate && validate.validate.email
                         ? "is-invalid "
                         : ""
                     }`}
-                    id="phone"
-                    name="phone"
-                    value={phone}
-                    placeholder="Phone Number"
-                    onChange={(e) => setPhone(e.target.value)}
+                    id="email"
+                    name="email"
+                    value={email}
+                    placeholder="Email id"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
 
                   <div
                     className={`invalid-feedback text-start ${
-                      validate.validate && validate.validate.phone
+                      validate.validate && validate.validate.email
                         ? "d-block"
                         : "d-none"
                     }`}
                   >
-                    {validate.validate && validate.validate.phone
+                    {validate.validate && validate.validate.email
                       ? validate.validate.email[0]
                       : ""}
                   </div>
