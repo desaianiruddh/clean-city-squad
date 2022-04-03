@@ -1,19 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "../../../utilities/Forms";
-
 import "./style.css";
 
-const LogIn = () => {
+const Signupform = (props) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
-  const validateLogin = () => {
+  const clickSignedUp = () => {
+    props.setIsSignedup(true);
+    console.log("555");
+  };
+  const validateRegister = () => {
     let isValid = true;
 
     let validator = Form.validator({
+      name: {
+        value: name,
+        isRequired: true,
+      },
+      email: {
+        value: email,
+        isRequired: true,
+        isEmail: true,
+      },
       phone: {
         value: phone,
         isRequired: true,
@@ -37,16 +51,17 @@ const LogIn = () => {
     return isValid;
   };
 
-  const authenticate = (e) => {
+  const register = (e) => {
     e.preventDefault();
 
-    const validate = validateLogin();
+    const validate = validateRegister();
 
     if (validate) {
       setValidate({});
+      setName("");
+      setEmail("");
       setPhone("");
       setPassword("");
-      alert("Successfully Login");
     }
   };
 
@@ -59,18 +74,73 @@ const LogIn = () => {
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-main-col d-flex justify-content-center">
-        <div className="main ">
+    <div className=" auth-wrapper">
+      <div className="auth-main-col  d-flex justify-content-center">
+        <div className="main">
           <div className="auth-body text-color">
-            <p className="my-4 fs-3">Login to your account</p>
+            <p className="my-4 fs-3">Create your Account</p>
             <div className="auth-form-container text-start">
               <form
                 className="auth-form"
                 method="POST"
-                onSubmit={authenticate}
+                onSubmit={register}
                 autoComplete={"off"}
               >
+                <div className="name mb-3">
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      validate.validate && validate.validate.name
+                        ? "is-invalid "
+                        : ""
+                    }`}
+                    id="name"
+                    name="name"
+                    value={name}
+                    placeholder="Name"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+
+                  <div
+                    className={`invalid-feedback text-start ${
+                      validate.validate && validate.validate.name
+                        ? "d-block"
+                        : "d-none"
+                    }`}
+                  >
+                    {validate.validate && validate.validate.name
+                      ? validate.validate.name[0]
+                      : ""}
+                  </div>
+                </div>
+
+                <div className="email mb-3">
+                  <input
+                    type="email"
+                    className={`form-control ${
+                      validate.validate && validate.validate.email
+                        ? "is-invalid "
+                        : ""
+                    }`}
+                    id="email"
+                    name="email"
+                    value={email}
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <div
+                    className={`invalid-feedback text-start ${
+                      validate.validate && validate.validate.email
+                        ? "d-block"
+                        : "d-none"
+                    }`}
+                  >
+                    {validate.validate && validate.validate.email
+                      ? validate.validate.email[0]
+                      : ""}
+                  </div>
+                </div>
+
                 <div className="email mb-3">
                   <input
                     type="number"
@@ -82,7 +152,7 @@ const LogIn = () => {
                     id="phone"
                     name="phone"
                     value={phone}
-                    placeholder="Phone"
+                    placeholder="Phone number"
                     onChange={(e) => setPhone(e.target.value)}
                   />
 
@@ -124,7 +194,7 @@ const LogIn = () => {
                         className={
                           showPassword ? "far fa-eye" : "far fa-eye-slash"
                         }
-                      ></i>{" "}
+                      ></i>
                     </button>
 
                     <div
@@ -139,30 +209,23 @@ const LogIn = () => {
                         : ""}
                     </div>
                   </div>
-
-                  <div className="extra mt-3 row justify-content-between">
-                    <div className="col-6">
-                      <div className="forgot-password space-password">
-                        <Link to="/forget-pass">Forgot password?</Link>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="btn btn-primary w-100 theme-btn mx-auto my-4"
+                    className="btn btn-primary w-100 theme-btn mx-auto"
+                    onClick={clickSignedUp}
                   >
-                    Log In
+                    Sign Up
                   </button>
                 </div>
               </form>
 
               <hr />
               <div className="auth-option text-center pt-2">
-                No Account?{" "}
-                <Link className="text-link spacing-link" to="/signup">
-                  Sign up{" "}
+                Have an account?
+                <Link className="my-4 text-link spacing-link" to="/login">
+                  Sign in
                 </Link>
               </div>
             </div>
@@ -173,4 +236,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Signupform;

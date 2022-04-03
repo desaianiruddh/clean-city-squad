@@ -14,6 +14,7 @@ import AdminLogIn from './components/Pages/AdminLogIn/AdminLogIn';
 import { fetchUserFromAPI } from './redux/actions/admin';
 import Signup from './components/Pages/UserSignupAndLogin/Signup';
 import LogIn from './components/Pages/UserSignupAndLogin/LogIn';
+import Forgot from './components/Pages/ForgetPassword/Forgetpass'
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
         <Route path="/user-dahsboard" element={<UserDashBoard />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/forget-pass" element={<Forgot />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
