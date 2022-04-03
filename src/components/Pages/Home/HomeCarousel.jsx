@@ -4,11 +4,11 @@ import Images from "../../../Images/Image";
 
 const HomeCarousel = () => {
   return (
-    <div className=" container mt-md-2">
-      <h2 className="text-center text-primary pt-3">
-        Welcome to a Cleaner World !
-      </h2>
-      <Carousel className="pt-4">
+    <>
+      <h3 className="text-center text-primary pt-3 mb-4">
+        Welcome to a Clean City Squad !
+      </h3>
+      <Carousel>
         <Carousel.Item interval={1000} className="text-dark">
           <img
             className="d-block w-100  slides"
@@ -45,7 +45,26 @@ const HomeCarousel = () => {
           />
         </Carousel.Item>
       </Carousel>
-    </div>
+      <div className="container mt-5 text-center">
+        <hr />
+        <h2 className=" text-primary">Our Goal</h2>
+        <hr />
+        <div className="goal-text bg-primary text-white p-sm-5 mt-4 d-flex justify-content-center">
+          Our main goal as an organization is to reduce and eliminate <br />
+          adverse impacts of waste on human health and the envirounment. <br />
+          In addition that is also benificial to protect the envirounment as
+          well.
+        </div>
+        <hr className="mt-4" />
+        <div className="text-center mt-4 fs-4">
+          "Stop! Don’t waste scrap; recycle it."
+        </div>
+        <div className="text-center mt-3 fs-4">
+          "Don’t lose a chance of reuse."
+        </div>
+        <hr className="mt-4" />
+      </div>
+    </>
   );
 };
 export default HomeCarousel;
