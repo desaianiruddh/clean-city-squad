@@ -35,7 +35,7 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/admin-login">
+              <Link className="nav-link fw-bold" to="/admin-dashboard">
                 Admin Login
               </Link>
             </li>

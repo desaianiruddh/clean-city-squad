@@ -1,0 +1,23 @@
+.images {
+    width: 400px;
+    height: 300px;
+    border: 2px solid blue;
+  }
+  .paragraph-text {
+    max-width: 700px;
+    padding-right: 0px 0px;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+  }
+  @media only screen and (max-width: 992px) {
+    .footer {
+      margin-top: 5px;
+      position: static;
+    }
+    .title-text {
+      margin-left: 30px;
+    }
+  }
+  

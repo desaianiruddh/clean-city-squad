@@ -1,239 +1,76 @@
-import { useState } from "react";
+import React from "react";
+import { Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Form from "../../../utilities/Forms";
+import * as Yup from "yup";
+
 import "./style.css";
+import InputField from "./InputField";
+import { postRequestForSignup } from "../../../redux/actions/signup";
 
-const Signupform = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [validate, setValidate] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
-
-  const clickSignedUp = () => {
-    props.setIsSignedup(true);
-    console.log("555");
+const SignUpForm = (props) => {
+  const dispatch = useDispatch();
+  const initialValues = {
+    name: "",
+    email: "",
+    phone_number: "",
+    password: "",
   };
-  const validateRegister = () => {
-    let isValid = true;
-
-    let validator = Form.validator({
-      name: {
-        value: name,
-        isRequired: true,
-      },
-      email: {
-        value: email,
-        isRequired: true,
-        isEmail: true,
-      },
-      phone: {
-        value: phone,
-        isRequired: true,
-        isDecimal: true,
-        minLength: 10,
-      },
-      password: {
-        value: password,
-        isRequired: true,
-        minLength: 8,
-      },
-    });
-
-    if (validator !== null) {
-      setValidate({
-        validate: validator.errors,
-      });
-
-      isValid = false;
-    }
-    return isValid;
-  };
-
-  const register = (e) => {
-    e.preventDefault();
-
-    const validate = validateRegister();
-
-    if (validate) {
-      setValidate({});
-      setName("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
-    }
-  };
-
-  const togglePassword = (e) => {
-    if (showPassword) {
-      setShowPassword(false);
-    } else {
-      setShowPassword(true);
-    }
-  };
-
   return (
-    <div className=" auth-wrapper">
-      <div className="auth-main-col  d-flex justify-content-center">
-        <div className="main">
-          <div className="auth-body text-color">
-            <p className="my-4 fs-3">Create your Account</p>
-            <div className="auth-form-container text-start">
-              <form
-                className="auth-form"
-                method="POST"
-                onSubmit={register}
-                autoComplete={"off"}
-              >
-                <div className="name mb-3">
-                  <input
-                    type="text"
-                    className={`form-control ${
-                      validate.validate && validate.validate.name
-                        ? "is-invalid "
-                        : ""
-                    }`}
-                    id="name"
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-
-                  <div
-                    className={`invalid-feedback text-start ${
-                      validate.validate && validate.validate.name
-                        ? "d-block"
-                        : "d-none"
-                    }`}
-                  >
-                    {validate.validate && validate.validate.name
-                      ? validate.validate.name[0]
-                      : ""}
-                  </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={Yup.object({
+        name: Yup.string()
+          .required("*Name is Required")
+          .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
+          .min(8, "*Insert Name with minimum 8 characters"),
+        email: Yup.string()
+          .email("*Email is Invalid")
+          .required("*Email is Required"),
+        phone_number: Yup.string()
+          .required("*Phone Number is Required")
+          .max(13, "Mobile No. should be 10 digit")
+          .min(10, "Mobile No. should be 10 digit")
+          .matches(
+            /^([0|+[0-9]{1,5})?([7-9][0-9]{9})$/,
+            "Only Indian Mobile number is Valid"
+          ),
+        password: Yup.string()
+          .min(8, "*Password must be at least 8 characters")
+          .required("*Password is Required"),
+      })}
+      onSubmit={(values) => {
+        props.setIsSignedup(true);
+        props.setPhoneNumber(values.phone_number)
+        dispatch(postRequestForSignup(values));
+      }}
+    >
+      {(formik) => (
+        <div className=" d-flex justify-content-center mt-5">
+          <div className="ms-4 mt-md-4 main  ">
+            <div className="signup-header my-4 fs-3 text-primary">Sign Up</div>
+            <div className=" ">
+              <Form>
+                <InputField label="Name" name="name" type="text" />
+                <InputField label="Email" name="email" type="email" />
+                <InputField label="Phone No" name="phone_number" type="text" />
+                <InputField label="Password" name="password" type="password" />
+                <button type="submit" className="btn btn-primary me-4 my-3">
+                  Submit
+                </button>
+                <div className="auth-option text-center pt-2">
+                  Have an account?
+                  <Link className="my-4 text-link spacing-link" to="/login">
+                    Sign in
+                  </Link>
                 </div>
-
-                <div className="email mb-3">
-                  <input
-                    type="email"
-                    className={`form-control ${
-                      validate.validate && validate.validate.email
-                        ? "is-invalid "
-                        : ""
-                    }`}
-                    id="email"
-                    name="email"
-                    value={email}
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <div
-                    className={`invalid-feedback text-start ${
-                      validate.validate && validate.validate.email
-                        ? "d-block"
-                        : "d-none"
-                    }`}
-                  >
-                    {validate.validate && validate.validate.email
-                      ? validate.validate.email[0]
-                      : ""}
-                  </div>
-                </div>
-
-                <div className="email mb-3">
-                  <input
-                    type="number"
-                    className={`form-control ${
-                      validate.validate && validate.validate.phone
-                        ? "is-invalid "
-                        : ""
-                    }`}
-                    id="phone"
-                    name="phone"
-                    value={phone}
-                    placeholder="Phone number"
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-
-                  <div
-                    className={`invalid-feedback text-start ${
-                      validate.validate && validate.validate.phone
-                        ? "d-block"
-                        : "d-none"
-                    }`}
-                  >
-                    {validate.validate && validate.validate.phone
-                      ? validate.validate.phone[0]
-                      : ""}
-                  </div>
-                </div>
-
-                <div className="password mb-3">
-                  <div className="input-group">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className={`form-control ${
-                        validate.validate && validate.validate.password
-                          ? "is-invalid "
-                          : ""
-                      }`}
-                      name="password"
-                      id="password"
-                      value={password}
-                      placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={(e) => togglePassword(e)}
-                    >
-                      <i
-                        className={
-                          showPassword ? "far fa-eye" : "far fa-eye-slash"
-                        }
-                      ></i>
-                    </button>
-
-                    <div
-                      className={`invalid-feedback text-start ${
-                        validate.validate && validate.validate.password
-                          ? "d-block"
-                          : "d-none"
-                      }`}
-                    >
-                      {validate.validate && validate.validate.password
-                        ? validate.validate.password[0]
-                        : ""}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-100 theme-btn mx-auto"
-                    onClick={clickSignedUp}
-                  >
-                    Sign Up
-                  </button>
-                </div>
-              </form>
-
-              <hr />
-              <div className="auth-option text-center pt-2">
-                Have an account?
-                <Link className="my-4 text-link spacing-link" to="/login">
-                  Sign in
-                </Link>
-              </div>
+              </Form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </Formik>
   );
 };
 
-export default Signupform;
+export default SignUpForm;

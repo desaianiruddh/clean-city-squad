@@ -8,7 +8,7 @@ const LogIn = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword] = useState(false);
 
   const validateLogin = () => {
     let isValid = true;
@@ -47,14 +47,6 @@ const LogIn = () => {
       setPhone("");
       setPassword("");
       alert("Successfully Login");
-    }
-  };
-
-  const togglePassword = (e) => {
-    if (showPassword) {
-      setShowPassword(false);
-    } else {
-      setShowPassword(true);
     }
   };
 
@@ -114,18 +106,6 @@ const LogIn = () => {
                       placeholder="Password"
                       onChange={(e) => setPassword(e.target.value)}
                     />
-
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={(e) => togglePassword(e)}
-                    >
-                      <i
-                        className={
-                          showPassword ? "far fa-eye" : "far fa-eye-slash"
-                        }
-                      ></i>{" "}
-                    </button>
 
                     <div
                       className={`invalid-feedback text-start ${
