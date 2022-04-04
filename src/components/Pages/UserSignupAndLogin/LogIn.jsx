@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "../../../utilities/Forms";
 
 import "./style.css";
@@ -9,6 +9,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
   const [showPassword] = useState(false);
+  const navigate = useNavigate();
 
   const validateLogin = () => {
     let isValid = true;
@@ -47,6 +48,7 @@ const LogIn = () => {
       setPhone("");
       setPassword("");
       alert("Successfully Login");
+      navigate("/user-dashboard");
     }
   };
 

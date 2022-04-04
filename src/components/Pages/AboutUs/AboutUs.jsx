@@ -40,7 +40,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div className="footer bg-primary w-100 text-white">
+      <div className="footer bg-primary w-100 text-white mt-3">
         <div className="text-center fs-3 pt-2 text-decoration-underline">
           Contact Us
         </div>
